@@ -10,34 +10,16 @@ module.exports = {
     path: path.resolve(__dirname, 'dist')
   },
   module: {
-    rules: [{
-      test: /\.css$/,
-      use: [
-        'style-loader',
-        'css-loader'
-      ],
-      include: [
-        path.resolve(__dirname, '../src')
-      ]
-    },
+    rules: [
       {
-        test: /\.scss$/,
+        test: /\.css$/,
         use: [
-          {
-            loader: "style-loader"
-          },
-          {
-            loader: "css-loader"
-          },
-          {
-            loader: "sass-loader",
-            options: {
-              javascriptEnabled: true,
-              includePaths: ['../node_modules']
-            }
-          }
+          'style-loader',
+          'css-loader'
         ],
-        // include: path.resolve(__dirname, '../')
+        include: [
+          path.resolve(__dirname, '../src')
+        ]
       },
       {
         test: /\.(png|svg|jpg|gif)$/,
@@ -54,7 +36,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CopyWebpackPlugin([{from: './src/vendor/abc2svg-1.js'}]),
-    new CopyWebpackPlugin([{from: './src/vendor/groove_utils.js'}])
-    ]
+    new CopyWebpackPlugin([{ from: './src/vendor/abc2svg-1.js' }]),
+    new CopyWebpackPlugin([{ from: './src/vendor/groove_utils.js' }])
+  ]
 };
