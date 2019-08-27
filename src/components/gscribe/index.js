@@ -8,7 +8,7 @@ class GScribe extends React.Component {
   constructor(props) {
     super(props);
     this.me = React.createRef();
-    this.state = { availableWidth: 400 }
+    this.state = { availableWidth: 500 }
   }
 
   componentDidMount() {
