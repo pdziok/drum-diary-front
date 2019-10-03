@@ -2,7 +2,7 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 
 import './App.css';
-import DailyPractice from './components/daily-practice';
+import PracticeLog from './components/practice-log';
 
 class App extends React.Component {
   constructor(props) {
@@ -30,7 +30,7 @@ class App extends React.Component {
                 rel="stylesheet" />
         </Helmet>
         {
-          this.state.grooveUtilsLoaded && <DailyPractice exercises={[{
+          this.state.grooveUtilsLoaded && <PracticeLog exercises={[{
             id: '1',
             gScribeUrl: 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RLRRLRLLRLRRLRLL|RLRRLRLLRLRRLRLL|',
             tempo: '100-130',

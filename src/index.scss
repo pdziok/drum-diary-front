@@ -13,3 +13,23 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.timeline {
+  max-width: none !important;
+
+  &:before {
+    left: 248px !important;
+  }
+
+  .title {
+    max-width: 250px !important;
+  }
+
+  .entry .body {
+    width: calc(100% - 250px) !important;
+  }
+
+  @media only screen and (max-width: 768px) {
+
+  }
+}

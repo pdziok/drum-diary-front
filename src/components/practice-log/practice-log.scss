@@ -1,0 +1,19 @@
+.practice-date-marker {
+  position: relative;
+  top: -20px;
+  left: 170px;
+  font-weight: 600;
+  font-size: 24px;
+  background-color: #ffffff;
+  border-top: 4px solid;
+  border-bottom: 4px solid;
+  display: inline-block;
+  margin: 10px 0;
+  padding: 5px 2px;
+
+  &.first-one {
+    padding: 10px 2px 5px;
+    margin-top: 0;
+    border-top: 0;
+  }
+}
