@@ -1,17 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { parseISO, format } from 'date-fns'
 import classNames from 'classnames';
 
 import './index.scss'
-
-function dateFrom(input) {
-  return format(parseISO(input), 'PPP');
-}
+import { longDateFrom } from '../../../../utils/datetime';
 
 function DateMarker({ current, previous }) {
-  const previousDate = previous && dateFrom(previous);
-  const currentDate = dateFrom(current);
+  const previousDate = previous && longDateFrom(previous);
+  const currentDate = longDateFrom(current);
   const dateToDisplay = previousDate !== currentDate ? currentDate : null;
 
   if (!dateToDisplay) {
