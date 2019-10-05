@@ -1,0 +1,33 @@
+$dateWidth: 220px;
+
+.timeline {
+  max-width: none !important;
+
+  &:before {
+    left: #{$dateWidth - 2px} !important;
+  }
+
+  .entry {
+    &:after {
+      content: "";
+      clear: both;
+      display: table;
+    }
+
+    .title {
+      max-width: $dateWidth !important;
+    }
+
+    .body {
+      width: calc(100% - #{$dateWidth}) !important;
+    }
+  }
+
+  .entry--wrapper:last-child .body {
+    margin: 0 0 1rem
+  }
+
+  @media only screen and (max-width: 768px) {
+
+  }
+}

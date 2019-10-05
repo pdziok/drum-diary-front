@@ -1,49 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
-import { parseISO, format } from 'date-fns'
-import { get } from 'lodash'
+import { get, chain } from 'lodash'
 
-import './practice-log.scss'
+import './index.scss'
 import Exercise from '../exercise'
-import Entry from './components/entry';
+import PracticeEntry from './components/practice-entry';
 import DateMarker from './components/date-marker';
+import { timeFrom, dateFrom } from '../../utils/datetime';
 
-function timeFrom(input) {
-  return format(parseISO(input), 'p');
-}
+class PracticeLog extends React.Component {
 
-function dateFrom(input) {
-  return format(parseISO(input), 'PPP');
-}
-
-function PracticeLog({ entries }) {
-  if (!entries || !entries.length) {
-    return null;
+  constructor(props) {
+    super(props);
+    this.state = { entries: this.sortEntries(props.entries) }
   }
 
-  return (
-    <Timeline lineColor={'#ddd'}>
+  sortEntries(entries) {
+    return chain(entries)
+      .groupBy(entry => dateFrom(entry.startedAt))
+      .valuesIn()
+      .reverse()
+      .flatten()
+      .value()
+  }
 
-      {entries.map((entry, i) => {
-        const previousDate = entries[i-1] && dateFrom(entries[i-1].startedAt);
-        const currentDate = dateFrom(entry.startedAt);
-        const dateToDisplay = previousDate !== currentDate ? currentDate : null;
-        return (
-          <div>
-            <DateMarker current={entry.startedAt} previous={get(entries, `[${i-1}].startedAt`, null)}/>
+  render() {
+    const { entries } = this.state;
+
+    if (!entries || !entries.length) {
+      return null;
+    }
+
+    return (
+      <Timeline lineColor={'#ddd'}>
+
+        {entries.map((entry, i) =>
+          <div key={i} className='entry--wrapper'>
+            <DateMarker current={entry.startedAt} previous={get(entries, `[${i - 1}].startedAt`, null)} />
             <TimelineItem
               key={entry.id}
               dateText={`${timeFrom(entry.startedAt)} - ${timeFrom(entry.finishedAt)}`}
             >
-              <Entry {...entry} />
+              <PracticeEntry {...entry} />
             </TimelineItem>
           </div>
-        )
-        }
-      )}
-    </Timeline>
-  )
+        )}
+      </Timeline>
+    )
+  }
 }
 
 PracticeLog.propTypes = {

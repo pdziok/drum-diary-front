@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { parseISO, format } from 'date-fns'
 import classNames from 'classnames';
 
-import './date-marker.scss'
+import './index.scss'
 
 function dateFrom(input) {
   return format(parseISO(input), 'PPP');

@@ -15,7 +15,7 @@ storiesOf('PracticeLog', module)
       id: '1',
       startedAt: '2019-08-10T10:10:10Z',
       finishedAt: '2019-08-10T10:20:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       exercise: {
         id: '1',
         name: 'Paradiddle',
@@ -29,7 +29,7 @@ storiesOf('PracticeLog', module)
       id: '1',
       startedAt: '2019-08-10T10:10:10Z',
       finishedAt: '2019-08-10T10:20:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       exercise: {
         id: '1',
         name: 'Paradiddle',
@@ -41,7 +41,7 @@ storiesOf('PracticeLog', module)
       id: '2',
       startedAt: '2019-08-10T10:20:10Z',
       finishedAt: '2019-08-10T10:30:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       notes: 'I don\'t like playing that',
       exercise: {
         id: '2',
@@ -56,7 +56,7 @@ storiesOf('PracticeLog', module)
       id: '1',
       startedAt: '2019-08-10T10:10:10Z',
       finishedAt: '2019-08-10T10:20:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       exercise: {
         id: '1',
         name: 'Paradiddle',
@@ -68,7 +68,7 @@ storiesOf('PracticeLog', module)
       id: '2',
       startedAt: '2019-08-10T10:20:10Z',
       finishedAt: '2019-08-10T10:30:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       notes: 'I don\'t like playing that',
       exercise: {
         id: '2',
@@ -81,7 +81,7 @@ storiesOf('PracticeLog', module)
       id: '3',
       startedAt: '2019-08-12T10:20:10Z',
       finishedAt: '2019-08-12T10:30:10Z',
-      tempo: '100-130',
+      bpm: '100-130',
       notes: 'Much better than 2 days ago',
       exercise: {
         id: '2',

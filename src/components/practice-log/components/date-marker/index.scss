@@ -1,7 +1,9 @@
+@import '../../index';
+
 .practice-date-marker {
   position: relative;
   top: -20px;
-  left: 170px;
+  left: #{$dateWidth - 80px};
   font-weight: 600;
   font-size: 24px;
   background-color: #ffffff;
