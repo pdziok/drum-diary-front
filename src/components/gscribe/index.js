@@ -21,7 +21,6 @@ class GScribe extends React.Component {
   componentDidMount() {
     window.addEventListener('resize', this.updateAvailableWidth);
     if (this.me.current) {
-      console.log(this.me)
       this.setState({ availableWidth: this.me.current.offsetWidth })
     }
   }
@@ -36,7 +35,7 @@ class GScribe extends React.Component {
     }
 
     return (
-      <div ref={this.me}>
+      <div className='gscribe--wrapper' ref={this.me}>
         <a href={this.props.url} target='_blank' rel='noopener noreferrer'>
           <InlineSVG src={generateSvgFromGScribe(this.props.url, Math.min(this.state.availableWidth, MAX_WIDTH))} />
         </a>

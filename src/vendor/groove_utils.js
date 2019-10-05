@@ -1158,8 +1158,8 @@ function GrooveUtils() {
 			fullABC += "%%musicspace 20px\n"; // add some more space
 		}
 
-		if (renderWidth < 400)
-			renderWidth = 400; // min-width
+		if (renderWidth < 250)
+			renderWidth = 250; // min-width
 		if (renderWidth > 3000)
 			renderWidth = 3000; // max-width
 		// the width of the music is always 25% bigger than what we pass in.   Go figure.

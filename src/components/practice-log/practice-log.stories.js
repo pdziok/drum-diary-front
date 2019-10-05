@@ -61,7 +61,9 @@ storiesOf('PracticeLog', module)
         id: '1',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl,
+        youtube: {
+          videoId: 'kPio-XnchYY'
+        }
       }
     },
     {

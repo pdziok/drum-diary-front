@@ -1,33 +1,55 @@
 $dateWidth: 220px;
 
 .timeline {
-  max-width: none !important;
-
-  &:before {
-    left: #{$dateWidth - 2px} !important;
-  }
-
-  .entry {
-    &:after {
-      content: "";
-      clear: both;
-      display: table;
-    }
-
-    .title {
-      max-width: $dateWidth !important;
-    }
-
-    .body {
-      width: calc(100% - #{$dateWidth}) !important;
-    }
-  }
+  margin: 0 auto;
 
   .entry--wrapper:last-child .body {
     margin: 0 0 1rem
   }
 
-  @media only screen and (max-width: 768px) {
+  .title {
+    max-width: $dateWidth !important;
+  }
 
+  @media only screen and (min-width: 769px) {
+    max-width: none !important;
+
+    &:before {
+      left: #{$dateWidth - 2px} !important;
+    }
+
+    .entry {
+      &:after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+
+      .body {
+        width: calc(100% - #{$dateWidth}) !important;
+      }
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    &:before {
+      left: 6px;
+    }
+
+    .body {
+      float: none;
+    }
+
+    .title{
+      float: none;
+
+      &:before {
+        left: 0px;
+      }
+
+      .timeline-item-date, .timeline-item-dateinner {
+        clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+      }
+    }
   }
 }

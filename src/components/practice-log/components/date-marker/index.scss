@@ -18,4 +18,8 @@
     margin-top: 0;
     border-top: 0;
   }
+
+  @media only screen and (max-width: 768px) {
+    left: 6px
+  }
 }
