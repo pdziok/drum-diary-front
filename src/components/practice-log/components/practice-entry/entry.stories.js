@@ -10,7 +10,7 @@ let gscribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=1
 const exercise = {
   id: '1',
   name: 'Paradiddle',
-  gScribeUrl: gscribeUrl,
+  gScribe: { url: gscribeUrl },
   description: 'Use moeller for the accented notes'
 };
 

@@ -1,3 +1,16 @@
 .gscribe--wrapper {
   overflow: hidden;
+  text-align: right;
+
+  .gscribe-link {
+    font-size: 12px;
+    position: relative;
+    top: -16px;
+    color: #ccc;
+
+    i {
+      font-size: 12px;
+      vertical-align: middle;
+    }
+  }
 }

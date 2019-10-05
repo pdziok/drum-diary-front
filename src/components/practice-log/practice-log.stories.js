@@ -20,7 +20,7 @@ storiesOf('PracticeLog', module)
         id: '1',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl,
+        gScribe: { url: gScribeUrl }
       }
     }
   ]} />)
@@ -34,7 +34,7 @@ storiesOf('PracticeLog', module)
         id: '1',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl,
+        gScribe: { url: gScribeUrl }
       }
     },
     {
@@ -47,7 +47,7 @@ storiesOf('PracticeLog', module)
         id: '2',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl
+        gScribe: { url: gScribeUrl }
       }
     },
   ]} />)
@@ -76,7 +76,7 @@ storiesOf('PracticeLog', module)
         id: '2',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl
+        gScribe: { url: gScribeUrl }
       }
     },
     {
@@ -89,7 +89,7 @@ storiesOf('PracticeLog', module)
         id: '2',
         name: 'Paradiddle',
         description: 'Use moeller for the accented notes',
-        gScribeUrl: gScribeUrl
+        gScribe: { url: gScribeUrl }
       }
     },
   ]} />)
