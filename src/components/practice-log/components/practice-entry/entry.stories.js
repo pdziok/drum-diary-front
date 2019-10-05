@@ -24,7 +24,7 @@ storiesOf('Entry', module)
   .add('exercise with tempo', () => <Entry
     id='1'
     exercise={exercise}
-    tempo='100-130'
+    bpm='100-130'
   />)
   .add('exercise with notes', () => <Entry
     id='1'
@@ -34,7 +34,7 @@ storiesOf('Entry', module)
   .add('exercise with tempo & notes', () => <Entry
     id='1'
     exercise={exercise}
-    tempo='100-130'
+    bpm='100-130'
     notes='Left hand is way worse, felt pain afterwards'
   />)
 ;
