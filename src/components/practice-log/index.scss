@@ -1,5 +1,24 @@
 $dateWidth: 220px;
 
+.add-new-button {
+  position: relative;
+  top: -20px;
+  left: #{$dateWidth - 12px};
+  background-color: #fff;
+  height: 20px;
+  cursor: pointer;
+  padding: 2px;
+  i {
+    font-size: 20px;
+    transition: transform 0.4s ease-in-out, color 0.4s ease-in-out;
+
+    &:hover {
+      transform: rotate(180deg);
+      color: #aaa
+    }
+  }
+}
+
 .timeline {
   margin: 0 auto;
 
