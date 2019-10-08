@@ -1,4 +1,5 @@
-$dateWidth: 220px;
+$dateWidth: 120px;
+$animationTime: 0.4s;
 
 .add-new-button {
   position: relative;
@@ -6,16 +7,38 @@ $dateWidth: 220px;
   left: #{$dateWidth - 12px};
   background-color: #fff;
   height: 20px;
+  width: 20px;
   cursor: pointer;
   padding: 2px;
+
   i {
     font-size: 20px;
-    transition: transform 0.4s ease-in-out, color 0.4s ease-in-out;
+    transition: transform $animationTime ease-in-out, color $animationTime ease-in-out;
+  }
 
-    &:hover {
-      transform: rotate(180deg);
-      color: #aaa
+  .description {
+    position: absolute;
+    white-space: nowrap;
+    font-size: 14px;
+    padding-left: 2px;
+    color: #aaa;
+    opacity: 0;
+    transition: opacity $animationTime ease-in-out;
+  }
+
+  &:hover {
+    i {
+      transform: rotate(270deg);
+      color: #aaa;
     }
+    .description {
+      display: inline;
+      opacity: 1;
+    }
+  }
+
+  @media only screen and (max-width: 768px) {
+    left: -4px;
   }
 }
 
@@ -50,6 +73,10 @@ $dateWidth: 220px;
     }
   }
 
+  .timeline-item-date, .timeline-item-dateinner {
+    clip-path: polygon(0% 0%, 90% 0%, 100% 50%, 90% 100%, 0% 100%);
+  }
+
   @media only screen and (max-width: 768px) {
     &:before {
       left: 6px;
@@ -59,7 +86,7 @@ $dateWidth: 220px;
       float: none;
     }
 
-    .title{
+    .title {
       float: none;
 
       &:before {
@@ -67,7 +94,7 @@ $dateWidth: 220px;
       }
 
       .timeline-item-date, .timeline-item-dateinner {
-        clip-path: polygon(0% 50%, 5% 0%, 100% 0%, 100% 100%, 5% 100%);
+        clip-path: polygon(0% 50%, 10% 0%, 100% 0%, 100% 100%, 10% 100%);
       }
     }
   }

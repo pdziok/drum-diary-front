@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import './index.scss'
+import { AddNewButton } from '../../index';
 import { longDateFrom } from '../../../../utils/datetime';
 
 function DateMarker({ current, previous }) {
@@ -15,8 +16,12 @@ function DateMarker({ current, previous }) {
   }
 
   return (
-    <div className={classNames({ 'practice-date-marker': true, 'first-one': !previousDate })}>
-      {dateToDisplay}
+    <div>
+      { previous && <AddNewButton /> }
+      <div className={classNames({ 'practice-date-marker': true, 'first-one': !previousDate })}>
+        {dateToDisplay}
+      </div>
+      <AddNewButton />
     </div>
   )
 }

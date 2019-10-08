@@ -10,9 +10,14 @@ import PracticeEntry from './components/practice-entry';
 import DateMarker from './components/date-marker';
 import { timeFrom, dateFrom } from '../../utils/datetime';
 
-function AddNewButton() {
-  return <div className='add-new-button'><MaterialIcon icon='add_circle'/></div>
-}
+export const AddNewButton = () => {
+  return (
+    <div className='add-new-button'>
+      <MaterialIcon icon='add_circle' />
+      <span className='description'>Add new log entry</span>
+    </div>
+  )
+};
 
 class PracticeLog extends React.Component {
 
@@ -35,17 +40,20 @@ class PracticeLog extends React.Component {
 
     return (
       <Timeline lineColor={'#ddd'}>
-        {entries.map((entry, i) =>
-          <div key={i} className='entry--wrapper'>
-            <DateMarker current={entry.startedAt} previous={get(entries, `[${i - 1}].startedAt`, null)} />
-            <AddNewButton />
-            <TimelineItem
-              key={entry.id}
-              dateText={`${timeFrom(entry.startedAt)} - ${timeFrom(entry.finishedAt)}`}
-            >
-              <PracticeEntry {...entry} />
-            </TimelineItem>
-          </div>
+        {entries.map((entry, i) => {
+            const previous = get(entries, `[${i - 1}].startedAt`, null);
+            return (
+              <div key={i} className='entry--wrapper'>
+                <DateMarker current={entry.startedAt} previous={previous} />
+                <TimelineItem
+                  key={entry.id}
+                  dateText={timeFrom(entry.startedAt)}
+                >
+                  <PracticeEntry {...entry} />
+                </TimelineItem>
+              </div>
+            )
+          }
         )}
         <AddNewButton />
       </Timeline>
