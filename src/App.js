@@ -2,23 +2,28 @@ import React from 'react';
 import { Helmet } from "react-helmet";
 
 import './App.css';
-import PracticeLog from './components/practice-log';
+import Layout from './components/layout'
+import { GrooveUtilsContext } from './contexts';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {grooveUtilsLoaded: false};
+    this.state = { grooveUtilsLoaded: false };
   }
 
   onScriptsLoaded = () => {
-    setTimeout(() => {
+    if (this.loader) {
+      clearInterval(this.loader);
+    }
+    this.loader = setInterval(() => {
       if (!!window.GrooveUtils) {
         this.setState({ grooveUtilsLoaded: true });
       }
-    }, 100) //todo make it repeatable with lower duration until it's loaded
+    }, 10) //todo make it repeatable with lower duration until it's loaded
   };
 
   render() {
+    // noinspection HtmlUnknownTarget
     return (
       <div className="App">
         <Helmet onChangeClientState={this.onScriptsLoaded}>
@@ -29,15 +34,9 @@ class App extends React.Component {
           <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
                 rel="stylesheet" />
         </Helmet>
-        {
-          this.state.grooveUtilsLoaded && <PracticeLog exercises={[{
-            id: '1',
-            gScribeUrl: 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RLRRLRLLRLRRLRLL|RLRRLRLLRLRRLRLL|',
-            tempo: '100-130',
-            startedAt: '2019-08-10T10:10:10Z',
-            finishedAt: '2019-08-10T10:20:10Z'
-          }]}/>
-        }
+        <GrooveUtilsContext.Provider value={this.state.grooveUtilsLoaded}>
+          <Layout />
+        </GrooveUtilsContext.Provider>
       </div>
     );
   }

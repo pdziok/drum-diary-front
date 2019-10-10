@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Youtube from 'react-youtube';
-import { debounce } from 'lodash'
 
 import './index.scss';
 import GScribe from '../gscribe'
