@@ -19,7 +19,7 @@ class App extends React.Component {
       if (!!window.GrooveUtils) {
         this.setState({ grooveUtilsLoaded: true });
       }
-    }, 10) //todo make it repeatable with lower duration until it's loaded
+    }, 10); //todo add limiter for N executions and display loading gscribe error to user
   };
 
   render() {
