@@ -34,7 +34,7 @@ function Exercise({ id, name, gScribe, youtube, description }) {
 Exercise.propTypes = {
   id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  gScribeUrl: PropTypes.shape({
+  gScribe: PropTypes.shape({
     url: PropTypes.string.isRequired
   }),
   youtube: Youtube.propTypes,

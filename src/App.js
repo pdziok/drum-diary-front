@@ -18,6 +18,7 @@ class App extends React.Component {
     this.loader = setInterval(() => {
       if (!!window.GrooveUtils) {
         this.setState({ grooveUtilsLoaded: true });
+        clearInterval(this.loader);
       }
     }, 10); //todo add limiter for N executions and display loading gscribe error to user
   };

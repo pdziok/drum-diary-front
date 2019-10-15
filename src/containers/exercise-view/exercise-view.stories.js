@@ -1,9 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { Provider } from 'react-redux'
 
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
-import Exercise from '.';
+import ExerciseView from '.';
+
+import configureStore from '../../store.js'
 
 const gscribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------' +
   '------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RL' +
@@ -15,6 +18,30 @@ const longDescription = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit
   ' ultricies erat eu posuere. Fusce dictum sem quis efficitur lacinia. Mauris at est lorem. Ut laoreet lacus id vest' +
   'ibulum rhoncus. In malesuada urna tellus, quis fringilla dui pellentesque sed. Quisque quis lacus justo.';
 
+const store = configureStore({
+  exercises: {
+    list: {
+      'someId': {
+        id: 'someId',
+        name: 'Some name'
+      }
+    },
+    current: {
+      id: 'someId',
+      name: 'Some name',
+      description: longDescription,
+      gScribe: {
+        url: gscribeUrl
+      }
+    }
+  }
+});
+
+const withStateProvider = story => (
+  <Provider store={store}>
+    {story()}
+  </Provider>
+);
 
 const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
@@ -22,51 +49,11 @@ const withGrooveUtilsProvider = story => (
   </GrooveUtilsContext.Provider>
 );
 
-storiesOf('Exercise.Gscribe', module)
+storiesOf('ExerciseView', module)
   .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(withStateProvider)
   .addDecorator(withGrooveUtilsProvider)
-  .add('Simple exercise', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    gScribe={{url: gscribeUrl}}
-  />)
-  .add('Exercise with short description', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    gScribe={{url: gscribeUrl}}
-    description='Use moeller for the accented notes'
-  />)
-  .add('Exercise with long description', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    gScribe={{url: gscribeUrl}}
-    description={longDescription}
-  />)
-;
-storiesOf('Exercise.Youtube', module)
-  .add('Simple exercise', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    youtube={{
-      videoId: 'kPio-XnchYY'
-    }}
-  />)
-  .add('Youtube exercise with short description', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    description='Use moeller for the accented notes'
-    youtube={{
-      videoId: 'kPio-XnchYY'
-    }}
-  />)
-  .add('Youtube exercise with long description', () => <Exercise
-    id='1'
-    name='Paradiddle'
-    description={longDescription}
-    youtube={{
-      videoId: 'kPio-XnchYY'
-    }}
-  />)
+  .add('Dummy exercise', () => <ExerciseView />)
 ;
 
