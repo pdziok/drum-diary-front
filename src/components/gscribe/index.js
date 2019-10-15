@@ -6,7 +6,6 @@ import { withStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Typography from '@material-ui/core/Typography';
 
-
 import './index.scss'
 import { generateSvgFromGScribe } from '../../utils/gscribe';
 import WidthAware from '../width-aware';
@@ -27,7 +26,6 @@ class GScribe extends React.Component {
   static contextType = GrooveUtilsContext;
 
   render() {
-    console.log(styles)
     if (!this.props.url) {
       return null;
     }
@@ -46,7 +44,7 @@ class GScribe extends React.Component {
                   propsMapper={gScribePropsMapper(this.props.url)} maxWidth='1024' className='gscribe--wrapper'>
         <InlineSVG />
         <a className='gscribe-link' href={this.props.url} target='_blank' rel='noopener noreferrer'>
-          Open in Groove Scribe <MaterialIcon icon='open_in_new' />
+          <Typography variant='caption'>Open in Groove Scribe</Typography> <MaterialIcon icon='open_in_new' />
         </a>
       </WidthAware>
     );

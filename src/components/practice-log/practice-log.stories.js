@@ -1,14 +1,25 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+
 import loadScriptDecorator from '../../utils/load-script-decorator'
+import { GrooveUtilsContext } from '../../contexts';
 import PracticeLog from '.';
 
 const gScribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------' +
   '------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RL' +
   'RRLRLLRLRRLRLL|RLRRLRLLRLRRLRLL|';
+
+
+const withGrooveUtilsProvider = story => (
+  <GrooveUtilsContext.Provider value={true}>
+    {story()}
+  </GrooveUtilsContext.Provider>
+);
+
 storiesOf('PracticeLog', module)
   .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(withGrooveUtilsProvider)
   .add('empty log', () => <PracticeLog />)
   .add('one entry', () => <PracticeLog entries={[
     {

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Youtube from 'react-youtube';
+import Typography from '@material-ui/core/Typography'
 
 import './index.scss';
 import GScribe from '../gscribe'
@@ -23,8 +24,8 @@ function YoutubeVideo(props) {
 function Exercise({ id, name, gScribe, youtube, description }) {
   return (
     <div className='exercise'>
-      <h3>{name}</h3>
-      <div className='description'>{description}</div>
+      <Typography variant='h2'>{name}</Typography>
+      <Typography variant='body1'>{description}</Typography>
       <YoutubeVideo {...youtube} />
       <GScribe {...gScribe} />
     </div>

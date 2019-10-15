@@ -1,5 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import { ThemeProvider } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
@@ -22,10 +24,17 @@ const withGrooveUtilsProvider = story => (
   </GrooveUtilsContext.Provider>
 );
 
+const withThemeProvider = story => (
+  <ThemeProvider theme={createMuiTheme()}>
+    {story()}
+  </ThemeProvider>
+);
+
 storiesOf('Exercise.Gscribe', module)
   .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('/groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
+  .addDecorator(withThemeProvider)
   .add('Simple exercise', () => <Exercise
     id='1'
     name='Paradiddle'
