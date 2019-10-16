@@ -45,10 +45,7 @@ class PracticeLog extends React.Component {
             return (
               <div key={i} className='entry--wrapper'>
                 <DateMarker current={entry.startedAt} previous={previous} />
-                <TimelineItem
-                  key={entry.id}
-                  dateText={timeFrom(entry.startedAt)}
-                >
+                <TimelineItem key={entry.id} dateText={timeFrom(entry.startedAt)}>
                   <PracticeEntry {...entry} />
                 </TimelineItem>
               </div>

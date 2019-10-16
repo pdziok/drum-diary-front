@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import { useParams } from 'react-router-dom';
 import {
-  LinearProgress, Grid, Typography, Link, Container,
-  Table, TableBody, TableCell, TableHead, TableRow,
-  Paper, Card, CardContent
+  Container,
+  Grid,
+  LinearProgress,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableRow,
+  Typography
 } from '@material-ui/core';
 
 import Exercise from '../../components/exercise';
 import { fetchExercise, fetchExerciseExecutions } from '../../actions/exercise';
-import { dateFrom, durationBetween, timestampFrom } from '../../utils/datetime';
+import { dateFrom, durationBetween } from '../../utils/datetime';
 
 function Executions({ data = [], pending }) {
   if (pending) {
@@ -45,43 +53,35 @@ function Executions({ data = [], pending }) {
   )
 }
 
-class ExerciseScreen extends React.Component {
+function ExerciseScreen({ id, exercise, executions, fetchExercise, fetchExecutions }) {
+  id = useParams().id || id;
 
-  componentWillMount() {
-    const id = this.props.id;
+  useEffect(() => {
     if (id) {
-      if (!this.props.exercise) {
-        this.props.fetchExercise(id)
-      }
-
-      if (!this.props.executions) {
-        this.props.fetchExecutions(id)
-      }
+      fetchExercise(id);
+      fetchExecutions(id);
     }
-  }
+  }, []);
 
-  render() {
-    const { exercise, executions } = this.props;
-    if (exercise.pending) {
-      return (
-        <LinearProgress />
-      );
-    }
-
+  if (exercise.pending) {
     return (
-      <Container>
-        <Grid container spacing={3}>
-          <Grid item xs={12}>
-            <Exercise {...exercise.data} />
-          </Grid>
-          <Grid item xs={12}>
-            <Typography variant='h4'>Executions</Typography>
-            <Executions {...executions} />
-          </Grid>
-        </Grid>
-      </Container>
-    )
+      <LinearProgress />
+    );
   }
+
+  return (
+    <Container>
+      <Grid container spacing={3}>
+        <Grid item xs={12}>
+          <Exercise {...exercise.data} />
+        </Grid>
+        <Grid item xs={12}>
+          <Typography variant='h4'>Executions</Typography>
+          <Executions {...executions} />
+        </Grid>
+      </Grid>
+    </Container>
+  )
 }
 
 const mapStateToProps = state => ({
