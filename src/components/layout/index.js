@@ -1,24 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import {
-  Switch, Route, Link, useLocation
-} from "react-router-dom";
-import {
-  Drawer, AppBar, Toolbar,
-  List, Typography, Divider,
-  IconButton, CssBaseline,
-  ListItem, ListItemIcon, ListItemText,
-} from '@material-ui/core';
-import {
-  Menu as MenuIcon, ChevronLeft as ChevronLeftIcon, ChevronRight as ChevronRightIcon,
-  Assignment as AssignmentIcon, Book as BookIcon, FiberSmartRecord as FiberSmartRecordIcon, Settings as SettingsIcon
-} from '@material-ui/icons';
+import { makeStyles } from '@material-ui/core/styles';
+import { Route, Switch } from "react-router-dom";
+import { AppBar, CssBaseline, IconButton, Toolbar, Typography, } from '@material-ui/core';
+import { Menu as MenuIcon } from '@material-ui/icons';
 
+import Drawer, { drawerWidth } from './components/drawer'
 import PracticeLog from '../practice-log';
 import ExerciseScreen from '../../containers/exercise-screen';
-
-const drawerWidth = 240;
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -45,29 +34,6 @@ const useStyles = makeStyles(theme => ({
   hide: {
     display: 'none',
   },
-  drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
-  },
-  drawerOpen: {
-    width: drawerWidth,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
-  },
   toolbar: {
     display: 'flex',
     alignItems: 'center',
@@ -80,12 +46,6 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3),
   },
 }));
-
-const menu = [
-  { text: 'Practice Log', icon: <AssignmentIcon />, path: '/' },
-  { text: 'Exercises', icon: <BookIcon />, path: '/exercises' },
-  { text: 'Record activity', icon: <FiberSmartRecordIcon />, path: '/record' },
-];
 
 const gScribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------' +
   '------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RL' +
@@ -133,11 +93,9 @@ const logEntries = [
   },
 ];
 
-export default function MiniDrawer() {
+export default function Layout() {
   const classes = useStyles();
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  const path = useLocation().pathname;
+  const [drawerOpen, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -153,7 +111,7 @@ export default function MiniDrawer() {
       <AppBar
         position="fixed"
         className={clsx(classes.appBar, {
-          [classes.appBarShift]: open,
+          [classes.appBarShift]: drawerOpen,
         })}
       >
         <Toolbar>
@@ -163,7 +121,7 @@ export default function MiniDrawer() {
             onClick={handleDrawerOpen}
             edge="start"
             className={clsx(classes.menuButton, {
-              [classes.hide]: open,
+              [classes.hide]: drawerOpen,
             })}
           >
             <MenuIcon />
@@ -173,44 +131,7 @@ export default function MiniDrawer() {
           </Typography>
         </Toolbar>
       </AppBar>
-      <Drawer
-        variant="permanent"
-        className={clsx(classes.drawer, {
-          [classes.drawerOpen]: open,
-          [classes.drawerClose]: !open,
-        })}
-        classes={{
-          paper: clsx({
-            [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
-          }),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbar}>
-          <IconButton onClick={handleDrawerClose}>
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </div>
-        <Divider />
-        <List>
-          {menu.map(item => (
-            <Link to={item.path} key={item.text}>
-              <ListItem button selected={path.match(item.path)}>
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.text} />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <Divider />
-        <List>
-          <ListItem button key='settings'>
-            <ListItemIcon><SettingsIcon /></ListItemIcon>
-            <ListItemText primary='Settings' />
-          </ListItem>
-        </List>
-      </Drawer>
+      <Drawer open={drawerOpen} handleClose={handleDrawerClose} />
       <main className={classes.content}>
         <div className={classes.toolbar} />
         <Switch>
