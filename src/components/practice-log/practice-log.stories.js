@@ -5,10 +5,7 @@ import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
 import PracticeLog from '.';
 
-const gScribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------' +
-  '------|----------------|&S=|OoooOoooOoooOooo|ooOOooOOooOOooOO|&K=|----------------|----------------|&Stickings=|RL' +
-  'RRLRLLRLRRLRLL|RLRRLRLLRLRRLRLL|';
-
+import { gScribeUrl } from '../../stories/fixtures';
 
 const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
@@ -103,6 +100,4 @@ storiesOf('PracticeLog', module)
         gScribe: { url: gScribeUrl }
       }
     },
-  ]} />)
-;
-
+  ]} />);

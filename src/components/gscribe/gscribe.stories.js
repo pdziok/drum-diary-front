@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
 import GScribe from '.';
-
+import { gScribeUrl } from '../../stories/fixtures';
 
 const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
@@ -18,5 +18,5 @@ storiesOf('GScribe', module)
   .addDecorator(withGrooveUtilsProvider)
   .add('without url', () => <GScribe />)
   .add('with valid url', () => <GScribe
-    url='https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=1&H=|xxxxxxxxxxxxxxxx|&S=|----O-------O---|&K=|o-------o-------|'
+    url={gScribeUrl}
   />);
