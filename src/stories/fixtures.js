@@ -15,3 +15,8 @@ export const simpleExercise = {
   gScribe: { url: gScribeUrl },
   description: 'Use moeller for the accented notes'
 };
+
+export const exerciseWithLongDescription = {
+  ...simpleExercise,
+  description: longDescription
+};

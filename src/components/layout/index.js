@@ -8,6 +8,7 @@ import { Menu as MenuIcon } from '@material-ui/icons';
 import Drawer, { drawerWidth } from './components/drawer'
 import PracticeLog from '../practice-log';
 import ExerciseScreen from '../../containers/exercise-screen';
+import ExercisesListScreen from '../../containers/exercises-list-screen'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -137,6 +138,9 @@ export default function Layout() {
         <Switch>
           <Route path="/exercise/:id">
             <ExerciseScreen />
+          </Route>
+          <Route path="/exercises/:page?">
+            <ExercisesListScreen />
           </Route>
           <Route path="/">
             <PracticeLog entries={logEntries} />

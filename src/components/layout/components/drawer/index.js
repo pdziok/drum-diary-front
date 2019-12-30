@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import clsx from 'clsx';
-import { Link, Route, Switch, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, } from '@material-ui/core';
 import {
@@ -11,7 +12,6 @@ import {
   FiberSmartRecord as FiberSmartRecordIcon,
   Settings as SettingsIcon
 } from '@material-ui/icons';
-import PropTypes from 'prop-types'
 
 export const drawerWidth = 240; //todo extract
 

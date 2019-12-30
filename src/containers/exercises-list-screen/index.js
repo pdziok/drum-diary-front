@@ -1,98 +1,57 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import {
-  Container,
-  Grid,
-  LinearProgress,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow,
-  Typography
-} from '@material-ui/core';
+import { Container, Grid, LinearProgress, Paper } from '@material-ui/core';
+import { truncate } from 'lodash'
 
 import Exercise from '../../components/exercise';
-import { fetchExercise, fetchExerciseExecutions } from '../../actions/exercise';
-import { dateFrom, durationBetween } from '../../utils/datetime';
+import { fetchExercises } from '../../actions/exercises';
+import { makeStyles } from '@material-ui/core/styles/index';
 
-function Executions({ data = [], pending }) {
+const useStyles = makeStyles(theme => ({
+  singleExercise: {
+    padding: theme.spacing(2),
+  },
+}));
+
+function ExercisesListScreen({ pending, list, fetchExercises }) {
+  const { page = 0 } = useParams();
+  const classes = useStyles();
+
+  useEffect(() => {
+    fetchExercises(page);
+  }, []);
+
   if (pending) {
     return (
       <LinearProgress />
     );
   }
 
-  if (!data.length) {
-    return <Typography variant='body2'>No executions yet</Typography>
-  }
-
-  return (
-    <Paper>
-      <Table size="small" aria-label="executions table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Date</TableCell>
-            <TableCell>Duration</TableCell>
-            <TableCell>BPM</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map(entry => (
-            <TableRow>
-              <TableCell>{dateFrom(entry.startedAt)}</TableCell>
-              <TableCell>{durationBetween(entry.startedAt, entry.finishedAt)}</TableCell>
-              <TableCell>{entry.bpm}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </Paper>
-  )
-}
-
-function ExercisesListScreen({ id, exercise, executions, fetchExercise, fetchExecutions }) {
-  id = useParams().id || id;
-
-  useEffect(() => {
-    if (id) {
-      fetchExercise(id);
-      fetchExecutions(id);
-    }
-  }, []);
-
-  if (exercise.pending) {
-    return (
-      <LinearProgress />
-    );
+  if (!list.length) {
+    return ''
   }
 
   return (
     <Container>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Exercise {...exercise.data} />
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant='h4'>Executions</Typography>
-          <Executions {...executions} />
-        </Grid>
+      <Grid container spacing={1}>
+      {list.map(exercise => <Grid item xs={12}>
+        <Paper className={classes.singleExercise}>
+          <Exercise {...exercise} description={truncate(exercise.description, {length: 100, separator: /[,.]? +/})} />
+        </Paper>
+      </Grid>)}
       </Grid>
     </Container>
   )
 }
 
 const mapStateToProps = state => ({
-  exercise: state.exercise.details,
-  executions: state.exercise.executions,
-  comments: state.exercise.comments
+  pending: state.exercises.pending,
+  list: state.exercises.data,
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchExercise: (id) => dispatch(fetchExercise(id)),
-  fetchExecutions: (id) => dispatch(fetchExerciseExecutions(id))
+  fetchExercises: (id) => dispatch(fetchExercises(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExercisesListScreen);
