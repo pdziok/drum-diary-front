@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Provider } from 'react-redux'
+import StoryRouter from 'storybook-react-router';
 
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
@@ -57,6 +58,7 @@ storiesOf('ExerciseView', module)
   .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('/groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
+  .addDecorator(StoryRouter())
   .add('Simple exercise', () => <Provider store={configureStore(basicState)}>
     <ExerciseView />
   </Provider>)
