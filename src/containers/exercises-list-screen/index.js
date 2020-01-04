@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, LinearProgress, Paper } from '@material-ui/core';
@@ -14,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-function ExercisesListScreen({ pending, list, fetchExercises }) {
+export function ExercisesListScreen({ pending, list, fetchExercises }) {
   const { page = 1 } = useParams();
   const classes = useStyles();
 
@@ -46,6 +47,14 @@ function ExercisesListScreen({ pending, list, fetchExercises }) {
     </Container>
   )
 }
+
+ExercisesListScreen.propTypes = {
+  pending: PropTypes.bool,
+  list: PropTypes.arrayOf(
+    Exercise.propTypes
+  ),
+  fetchExercises: PropTypes.func,
+};
 
 const mapStateToProps = state => ({
   pending: state.exercises.pending,
