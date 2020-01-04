@@ -6,7 +6,7 @@ import './index.scss'
 import { AddNewButton } from '../../index';
 import { longDateFrom } from '../../../../utils/datetime';
 
-function DateMarker({ current, previous }) {
+function DateMarker({ current, previous, onClickAddNew }) {
   const previousDate = previous && longDateFrom(previous);
   const currentDate = longDateFrom(current);
   const dateToDisplay = previousDate !== currentDate ? currentDate : null;
@@ -17,11 +17,10 @@ function DateMarker({ current, previous }) {
 
   return (
     <div>
-      { previous && <AddNewButton /> }
       <div className={classNames({ 'practice-date-marker': true, 'first-one': !previousDate })}>
         {dateToDisplay}
       </div>
-      <AddNewButton />
+      <AddNewButton onClick={onClickAddNew} />
     </div>
   )
 }
@@ -29,6 +28,7 @@ function DateMarker({ current, previous }) {
 DateMarker.propTypes = {
   current: PropTypes.string.isRequired,
   previous: PropTypes.string,
+  onClickAddNew: PropTypes.func
 };
 
 export default DateMarker;

@@ -15,12 +15,14 @@ const useStyles = makeStyles(theme => ({
 }));
 
 function ExercisesListScreen({ pending, list, fetchExercises }) {
-  const { page = 0 } = useParams();
+  const { page = 1 } = useParams();
   const classes = useStyles();
 
   useEffect(() => {
-    fetchExercises(page);
+      fetchExercises(page);
   }, []);
+
+  console.log(pending, list);
 
   if (pending) {
     return (

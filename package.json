@@ -56,5 +56,14 @@
     "copy-webpack-plugin": "5.0.4",
     "react-app-rewired": "2.1.3",
     "storybook-react-router": "1.0.8"
+  },
+  "proxy": {
+    "/api": {
+      "target": "http://localhost:8888",
+      "headers": {
+        "host": "api.target.com"
+      },
+      "logLevel": "debug"
+    }
   }
 }

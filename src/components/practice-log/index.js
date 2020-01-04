@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Timeline, TimelineItem } from 'vertical-timeline-component-for-react';
 import MaterialIcon from '@material/react-material-icon';
@@ -9,42 +9,53 @@ import Exercise from '../exercise'
 import PracticeEntry from './components/practice-entry';
 import DateMarker from './components/date-marker';
 import { timeFrom, dateFrom } from '../../utils/datetime';
+import SelectExerciseDialog from './components/select-exercise-dialog';
 
-export const AddNewButton = () => {
+export const AddNewButton = ({ onClick }) => {
   return (
-    <div className='add-new-button'>
+    <div className='add-new-button' onClick={onClick}>
       <MaterialIcon icon='add_circle' />
       <span className='description'>Add new log entry</span>
     </div>
   )
 };
 
-class PracticeLog extends React.Component {
+const sortEntries = (entries) => {
+  return chain(entries)
+    .groupBy(entry => dateFrom(entry.startedAt))
+    .valuesIn()
+    .reverse()
+    .flatten()
+    .value()
+};
 
-  constructor(props) {
-    super(props);
-    this.state = { entries: this.sortEntries(props.entries) }
-  }
+function PracticeLog({ entries }) {
+  const [sortedEntries, setEntries] = useState([]);
+  const [addNewDialogOpen, setDialogOpen] = useState(false);
+  const [selectedValue, setSelectedValue] = useState();
 
-  sortEntries(entries) {
-    return chain(entries)
-      .groupBy(entry => dateFrom(entry.startedAt))
-      .valuesIn()
-      .reverse()
-      .flatten()
-      .value()
-  }
+  useEffect(() => {
+    setEntries(sortEntries(entries))
+  }, []);
 
-  render() {
-    const entries = this.state.entries || [];
+  const handleClickOpen = () => {
+    setDialogOpen(true);
+  };
 
-    return (
+  const handleClose = value => {
+    setDialogOpen(false);
+    setSelectedValue(value);
+  };
+
+  return (
+    <>
       <Timeline lineColor={'#ddd'}>
-        {entries.map((entry, i) => {
-            const previous = get(entries, `[${i - 1}].startedAt`, null);
+        {sortedEntries.map((entry, i) => {
+            const previous = get(sortedEntries, `[${i - 1}].startedAt`, null);
             return (
               <div key={i} className='entry--wrapper'>
-                <DateMarker current={entry.startedAt} previous={previous} />
+                { previous && <AddNewButton onClick={handleClickOpen} /> }
+                <DateMarker current={entry.startedAt} previous={previous} onClickAddNew={handleClickOpen} />
                 <TimelineItem key={entry.id} dateText={timeFrom(entry.startedAt)}>
                   <PracticeEntry {...entry} />
                 </TimelineItem>
@@ -52,10 +63,11 @@ class PracticeLog extends React.Component {
             )
           }
         )}
-        <AddNewButton />
+        <AddNewButton onClick={handleClickOpen} />
       </Timeline>
-    )
-  }
+      <SelectExerciseDialog onClose={handleClose} open={addNewDialogOpen} selectedValue={selectedValue} initiallyExpanded='existing' />
+    </>
+  )
 }
 
 PracticeLog.propTypes = {
