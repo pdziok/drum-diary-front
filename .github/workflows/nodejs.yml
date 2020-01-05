@@ -27,6 +27,6 @@ jobs:
     - name: gh-pages
       run: yarn run deploy-storybook --ci
       if: matrix.node-version == '8.x'
-      env:
-        CI: true
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#      env:
+#        CI: true
+#        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
