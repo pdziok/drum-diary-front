@@ -61,7 +61,7 @@ export function ExerciseScreen({ exercise, executions, fetchExercise, fetchExecu
       fetchExercise(id);
       fetchExecutions(id);
     }
-  }, []);
+  }, [id, fetchExercise, fetchExecutions]);
 
   if (exercise.pending) {
     return (

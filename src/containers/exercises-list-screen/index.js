@@ -21,7 +21,7 @@ export function ExercisesListScreen({ pending, list, fetchExercises }) {
 
   useEffect(() => {
       fetchExercises(page);
-  }, []);
+  }, [page, fetchExercises]);
 
   console.log(pending, list);
 

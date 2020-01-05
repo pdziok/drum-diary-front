@@ -36,7 +36,7 @@ function PracticeLog({ entries }) {
 
   useEffect(() => {
     setEntries(sortEntries(entries))
-  }, []);
+  }, [entries]);
 
   const handleClickOpen = () => {
     setSelectedValue('existing');
