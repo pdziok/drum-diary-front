@@ -5,8 +5,6 @@ import loadScriptDecorator from '../../../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../../../contexts';
 import Dialog from '.';
 
-// import { simpleExercise } from '../../../../stories/fixtures';
-
 const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
     {story()}
@@ -14,8 +12,8 @@ const withGrooveUtilsProvider = story => (
 );
 
 storiesOf('PracticeLog.SelectExerciseDialog', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .add('Simple Dialog', () => <Dialog open={true} />)
 ;

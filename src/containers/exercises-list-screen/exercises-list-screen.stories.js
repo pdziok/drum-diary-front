@@ -15,8 +15,8 @@ const withGrooveUtilsProvider = story => (
 );
 
 storiesOf('ExercisesListScreen', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .addDecorator(StoryRouter())
   .add('pending', () => <ExercisesListScreen {...{

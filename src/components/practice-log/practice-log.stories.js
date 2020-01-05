@@ -14,8 +14,8 @@ const withGrooveUtilsProvider = story => (
 );
 
 storiesOf('PracticeLog', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .add('empty log', () => <PracticeLog />)
   .add('one entry', () => <PracticeLog entries={[

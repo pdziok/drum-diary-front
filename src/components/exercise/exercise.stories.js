@@ -22,8 +22,8 @@ const withThemeProvider = story => (
 );
 
 storiesOf('Exercise.Gscribe', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .addDecorator(withThemeProvider)
   .add('Simple exercise', () => <Exercise

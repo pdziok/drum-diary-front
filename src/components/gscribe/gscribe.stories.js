@@ -13,8 +13,8 @@ const withGrooveUtilsProvider = story => (
 );
 
 storiesOf('GScribe', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .add('without url', () => <GScribe />)
   .add('with valid url', () => <GScribe

@@ -57,8 +57,8 @@ const withGrooveUtilsProvider = story => (
 );
 
 storiesOf('ExerciseScreen', module)
-  .addDecorator(loadScriptDecorator('/abc2svg-1.js'))
-  .addDecorator(loadScriptDecorator('/groove_utils.js'))
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .addDecorator(StoryRouter())
   .add('Pending exercise', () => <ExerciseScreen {...pendingExercise} />)
