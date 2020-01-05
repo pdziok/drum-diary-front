@@ -24,9 +24,11 @@ jobs:
         yarn test
       env:
         CI: true
-    - name: gh-pages
-      run: yarn run deploy-storybook --ci
+    - name: storybook
+      run: yarn run build-storybook
       if: matrix.node-version == '8.x'
-#      env:
-#        CI: true
-#        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: GitHub Pages
+      uses: crazy-max/ghaction-github-pages@v1.2.5
+      if: matrix.node-version == '8.x'
+      with:
+        build_dir: .out
