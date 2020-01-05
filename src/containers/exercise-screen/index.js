@@ -53,8 +53,8 @@ function Executions({ data = [], pending }) {
   )
 }
 
-function ExerciseScreen({ id, exercise, executions, fetchExercise, fetchExecutions }) {
-  id = useParams().id || id;
+export function ExerciseScreen({ exercise, executions, fetchExercise, fetchExecutions }) {
+  const { id } = useParams();
 
   useEffect(() => {
     if (id) {

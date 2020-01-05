@@ -32,13 +32,14 @@ const sortEntries = (entries) => {
 function PracticeLog({ entries }) {
   const [sortedEntries, setEntries] = useState([]);
   const [addNewDialogOpen, setDialogOpen] = useState(false);
-  const [selectedValue, setSelectedValue] = useState();
+  const [selectedValue, setSelectedValue] = useState('existing');
 
   useEffect(() => {
     setEntries(sortEntries(entries))
   }, []);
 
   const handleClickOpen = () => {
+    setSelectedValue('existing');
     setDialogOpen(true);
   };
 

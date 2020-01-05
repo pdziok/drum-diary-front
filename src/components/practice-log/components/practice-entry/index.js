@@ -44,7 +44,7 @@ PracticeEntry.propTypes = {
   id: PropTypes.string.isRequired,
   bpm: PropTypes.string,
   notes: PropTypes.string,
-  exercise: Exercise.propTypes.isRequired
+  exercise: Exercise.propTypes
 };
 
 export default PracticeEntry;

@@ -1,42 +1,52 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { Provider } from 'react-redux'
 import StoryRouter from 'storybook-react-router';
 
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
-import ExerciseScreen from '.';
-
-import configureStore from '../../store.js'
+import { ExerciseScreen } from '.';
 
 import { gScribeUrl, longDescription } from '../../stories/fixtures';
 
-const basicState = {
+const pendingExercise = {
   exercise: {
-    details: {
-      pending: false,
-      data: {
-        id: 'someId',
-        name: 'Some name',
-        description: longDescription,
-        gScribe: {
-          url: gScribeUrl
-        }
+    pending: true
+  },
+  fetchExercise: () => {},
+  fetchExecutions: () => {}
+};
+
+const simpleExercise = {
+  exercise: {
+    pending: false,
+    data: {
+      id: 'someId',
+      name: 'Some name',
+      description: longDescription,
+      gScribe: {
+        url: gScribeUrl
       }
-    },
+    }
+  },
+  fetchExercise: () => {},
+  fetchExecutions: () => {}
+};
+
+const exerciseWithPendingExecutions = {
+  ...simpleExercise,
+  executions: {
+    pending: true,
   }
 };
 
-const stateWithExecutions = {
-  exercise: {
-    ...basicState.exercise,
-    executions: {
-      pending: false,
-      data: [
-        { startedAt: '2019-10-10T10:10:10', finishedAt: '2019-10-10T10:18:10', bpm: '100' },
-        { startedAt: '2019-10-08T10:10:10', finishedAt: '2019-10-08T10:25:10', bpm: '95' },
-      ]
-    }
+const exerciseWithExecutions = {
+  ...simpleExercise,
+  executions: {
+    pending: false,
+    data: [
+      { startedAt: '2019-10-10T10:10:10', finishedAt: '2019-10-10T10:18:10', bpm: '100' },
+      { startedAt: '2019-10-08T10:10:10', finishedAt: '2019-10-08T10:25:10', bpm: '95' },
+    ]
   }
 };
 
@@ -51,11 +61,9 @@ storiesOf('ExerciseScreen', module)
   .addDecorator(loadScriptDecorator('/groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
   .addDecorator(StoryRouter())
-  .add('Simple exercise', () => <Provider store={configureStore(basicState)}>
-    <ExerciseScreen />
-  </Provider>)
-  .add('Exercise with executions', () => <Provider store={configureStore(stateWithExecutions)}>
-    <ExerciseScreen />
-  </Provider>)
+  .add('Pending exercise', () => <ExerciseScreen {...pendingExercise} />)
+  .add('Simple exercise', () => <ExerciseScreen {...simpleExercise} />)
+  .add('Loaded Exercise with pending executions', () => <ExerciseScreen {...exerciseWithPendingExecutions} />)
+  .add('Exercise with executions', () => <ExerciseScreen {...exerciseWithExecutions} />)
 ;
 

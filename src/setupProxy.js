@@ -1,10 +1,12 @@
 const proxy = require('http-proxy-middleware');
 
-const { proxy: proxyConfigs } = require('../package.json');
-
-module.exports = router => {
-  if(typeof proxyConfigs === 'string')
-    router.use(proxy('/', { target: proxyConfigs }));
-  else
-    Object.keys(proxyConfigs).forEach( key => router.use(key, proxy(proxyConfigs[key])) );
+module.exports = function(app) {
+  const options = {
+    target: 'http://localhost:8888', // mock server
+    headers: {
+      host: 'api.target.com' // here to fill in the host of the specific mock api
+    },
+    logLevel: 'debug'
+  };
+  app.use(proxy('/api', options));
 };
