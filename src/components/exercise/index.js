@@ -9,7 +9,7 @@ import WidthAware from '../width-aware';
 
 const ytPropsMapper = (width) => ({ opts: { width }});
 
-function YoutubeVideo(props) {
+export function YoutubeVideo(props) {
   if (!props.videoId) {
     return null;
   }

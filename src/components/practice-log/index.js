@@ -10,6 +10,7 @@ import PracticeEntry from './components/practice-entry';
 import DateMarker from './components/date-marker';
 import { timeFrom, dateFrom } from '../../utils/datetime';
 import SelectExerciseDialog from './components/select-exercise-dialog';
+import { accentedParadiddles, doubles, paradiddle, singles } from '../../stories/fixtures';
 
 export const AddNewButton = ({ onClick }) => {
   return (
@@ -28,6 +29,8 @@ const sortEntries = (entries) => {
     .flatten()
     .value()
 };
+
+const exercises = [singles, doubles, paradiddle, accentedParadiddles];
 
 function PracticeLog({ entries }) {
   const [sortedEntries, setEntries] = useState([]);
@@ -55,7 +58,7 @@ function PracticeLog({ entries }) {
             const previous = get(sortedEntries, `[${i - 1}].startedAt`, null);
             return (
               <div key={i} className='entry--wrapper'>
-                { previous && <AddNewButton onClick={handleClickOpen} /> }
+                {previous && <AddNewButton onClick={handleClickOpen} />}
                 <DateMarker current={entry.startedAt} previous={previous} onClickAddNew={handleClickOpen} />
                 <TimelineItem key={entry.id} dateText={timeFrom(entry.startedAt)}>
                   <PracticeEntry {...entry} />
@@ -66,7 +69,8 @@ function PracticeLog({ entries }) {
         )}
         <AddNewButton onClick={handleClickOpen} />
       </Timeline>
-      <SelectExerciseDialog onClose={handleClose} open={addNewDialogOpen} selectedValue={selectedValue} initiallyExpanded='existing' />
+      <SelectExerciseDialog onClose={handleClose} open={addNewDialogOpen} selectedValue={selectedValue}
+                            initiallyExpanded='existing' search={{list: exercises, pending: false}} />
     </>
   )
 }

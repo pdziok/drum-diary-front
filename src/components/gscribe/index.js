@@ -43,9 +43,12 @@ class GScribe extends React.Component {
       <WidthAware delay='200'
                   propsMapper={gScribePropsMapper(this.props.url)} maxWidth='1024' className='gscribe--wrapper'>
         <InlineSVG />
-        <a className='gscribe-link' href={this.props.url} target='_blank' rel='noopener noreferrer'>
-          <Typography variant='caption'>Open in Groove Scribe</Typography> <MaterialIcon icon='open_in_new' />
-        </a>
+        {
+          !this.props.hideLink &&
+          <a className='gscribe-link' href={this.props.url} target='_blank' rel='noopener noreferrer'>
+            <Typography variant='caption'>Open in Groove Scribe</Typography> <MaterialIcon icon='open_in_new' />
+          </a>
+        }
       </WidthAware>
     );
   }
@@ -53,6 +56,7 @@ class GScribe extends React.Component {
 
 GScribe.propTypes = {
   url: PropTypes.string.isRequired,
+  hideLink: PropTypes.bool
 };
 
 export default withStyles(styles)(GScribe);

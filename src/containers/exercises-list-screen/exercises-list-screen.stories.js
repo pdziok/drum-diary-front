@@ -6,7 +6,7 @@ import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
 import { ExercisesListScreen } from '.';
 
-import { exerciseWithLongDescription } from '../../stories/fixtures';
+import { paradiddle, singles, doubles, accentedParadiddles } from '../../stories/fixtures';
 
 const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
@@ -26,12 +26,12 @@ storiesOf('ExercisesListScreen', module)
   }} />)
   .add('1 exercise', () => <ExercisesListScreen {...{
     pending: false,
-    list: [exerciseWithLongDescription],
+    list: [accentedParadiddles],
     fetchExercises: () => {}
   }} />)
   .add('2 exercises', () => <ExercisesListScreen {...{
     pending: false,
-    list: [exerciseWithLongDescription, exerciseWithLongDescription],
+    list: [singles, doubles, paradiddle, accentedParadiddles],
     fetchExercises: () => {}
   }} />)
 ;

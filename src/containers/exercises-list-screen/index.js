@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { Container, Grid, LinearProgress, Paper } from '@material-ui/core';
-import { truncate } from 'lodash'
 
 import Exercise from '../../components/exercise';
 import { fetchExercises } from '../../actions/exercises';
 import { makeStyles } from '@material-ui/core/styles/index';
+import { smartTruncate } from '../../utils/string';
 
 const useStyles = makeStyles(theme => ({
   singleExercise: {
@@ -20,7 +20,7 @@ export function ExercisesListScreen({ pending, list, fetchExercises }) {
   const classes = useStyles();
 
   useEffect(() => {
-      fetchExercises(page);
+    fetchExercises(page);
   }, [page, fetchExercises]);
 
   console.log(pending, list);
@@ -38,11 +38,11 @@ export function ExercisesListScreen({ pending, list, fetchExercises }) {
   return (
     <Container>
       <Grid container spacing={1}>
-      {list.map(exercise => <Grid item xs={12}>
-        <Paper className={classes.singleExercise}>
-          <Exercise {...exercise} description={truncate(exercise.description, {length: 100, separator: /[,.]? +/})} />
-        </Paper>
-      </Grid>)}
+        {list.map(exercise => <Grid item xs={12}>
+          <Paper className={classes.singleExercise}>
+            <Exercise {...exercise} description={smartTruncate(exercise.description, 100)} />
+          </Paper>
+        </Grid>)}
       </Grid>
     </Container>
   )
