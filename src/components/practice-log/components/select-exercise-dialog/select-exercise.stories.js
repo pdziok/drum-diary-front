@@ -17,29 +17,25 @@ const noop = () => {
 
 const exercises = [singles, doubles, paradiddle, accentedParadiddles];
 
-storiesOf('PracticeLog.SelectExerciseDialog', module)
+storiesOf('PracticeLog.SelectExerciseDialog.Select Exercise', module)
   .addDecorator(loadScriptDecorator('abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)
-  .add('Simple Dialog', () => <Dialog open={true} onClose={noop}/>)
   .add('Dialog with existing exercises opened', () => <Dialog open={true} onClose={noop} search={{
     pending: false,
     list: exercises,
     onChange: noop,
   }} />)
-  .add('Dialog with existing exercises search pending', () => <Dialog open={true} onClose={noop}
-                                                                      initiallyExpanded='existing' search={{
+  .add('Dialog with existing exercises search pending', () => <Dialog open={true} onClose={noop} search={{
     pending: true,
     onChange: noop,
   }} />)
-  .add('Dialog with existing exercises opened', () => <Dialog open={true} onClose={noop}
-                                                              initiallyExpanded='existing' search={{
+  .add('Dialog with existing exercises opened', () => <Dialog open={true} onClose={noop} search={{
     pending: false,
     list: exercises,
     onChange: noop,
   }} />)
-  .add('Dialog with not existing exercises opened', () => <Dialog open={true} onClose={noop}
-                                                              initiallyExpanded='existing' search={{
+  .add('Dialog with not existing exercises opened', () => <Dialog open={true} onClose={noop} search={{
     pending: false,
     list: [],
     criteria: {
@@ -48,5 +44,16 @@ storiesOf('PracticeLog.SelectExerciseDialog', module)
     },
     onChange: noop,
   }} />)
-  .add('Dialog with new exercise opened', () => <Dialog open={true} onClose={noop} initiallyExpanded='new-exercise' />)
+;
+storiesOf('PracticeLog.SelectExerciseDialog.Create new exercise', module)
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
+  .addDecorator(withGrooveUtilsProvider)
+  .add('Simple Dialog', () => <Dialog open={true} onClose={noop} initialStep={2} />)
+;
+storiesOf('PracticeLog.SelectExerciseDialog.Fill entry details', module)
+  .addDecorator(loadScriptDecorator('abc2svg-1.js'))
+  .addDecorator(loadScriptDecorator('groove_utils.js'))
+  .addDecorator(withGrooveUtilsProvider)
+  .add('Simple Dialog', () => <Dialog open={true} onClose={noop} initialStep={3} />)
 ;

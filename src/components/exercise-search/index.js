@@ -8,7 +8,6 @@ const useStyles = makeStyles(theme => ({
   searchWrapper: {
     display: 'flex',
     flexDirection: 'column',
-    padding: theme.spacing(0, 2),
   },
   tagsWrapper: {
     display: 'flex',
