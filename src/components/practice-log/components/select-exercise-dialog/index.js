@@ -117,6 +117,8 @@ const getDialogTitle = (step) => {
       return 'Create new exercise';
     case 3:
       return 'Fill in entry details';
+    default:
+      return '';
   }
 };
 
