@@ -62,7 +62,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchExercises: (id) => dispatch(fetchExercises(id)),
+  fetchExercises: (page) => dispatch(fetchExercises(page)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExercisesListScreen);

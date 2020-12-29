@@ -9,7 +9,7 @@ import {
   Book as BookIcon,
   ChevronLeft as ChevronLeftIcon,
   ChevronRight as ChevronRightIcon,
-  FiberSmartRecord as FiberSmartRecordIcon,
+  // FiberSmartRecord as FiberSmartRecordIcon,
   Settings as SettingsIcon
 } from '@material-ui/icons';
 
@@ -51,7 +51,7 @@ const useStyles = makeStyles(theme => ({
 const menu = [
   { text: 'Practice Log', icon: <AssignmentIcon />, path: '/' },
   { text: 'Exercises', icon: <BookIcon />, path: '/exercises' },
-  { text: 'Record activity', icon: <FiberSmartRecordIcon />, path: '/record' },
+  // { text: 'Record activity', icon: <FiberSmartRecordIcon />, path: '/record' },
 ];
 
 export default function LayoutDrawer({ open = false, handleClose }) {
@@ -82,7 +82,7 @@ export default function LayoutDrawer({ open = false, handleClose }) {
     <List>
       {menu.map(item => (
         <Link to={item.path} key={item.text}>
-          <ListItem button selected={path.match(item.path)}>
+          <ListItem button selected={!!path.match(item.path)?.length || false}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
           </ListItem>
