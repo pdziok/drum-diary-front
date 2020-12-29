@@ -13,7 +13,7 @@
     "http-proxy-middleware": "0.20.0",
     "lodash": "4.17.19",
     "mock-server-local": "2.6.1",
-    "node-sass": "4.12.0",
+    "node-sass": "4.13.1",
     "prop-types": "15.7.2",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
