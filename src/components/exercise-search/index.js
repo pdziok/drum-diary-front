@@ -1,29 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Box, Chip, TextField } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles/index';
+import { Box, Chip, TextField } from '@mui/material';
 import { remove } from 'lodash';
-
-const useStyles = makeStyles(theme => ({
-  searchWrapper: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  tagsWrapper: {
-    display: 'flex',
-    justifyContent: 'left',
-    flexWrap: 'wrap',
-    margin: theme.spacing(0, -0.5),
-    '& > *': {
-      margin: theme.spacing(0.5),
-    },
-  }
-}));
 
 const availableTags = ['hands', 'legs', 'coordination', 'independence', 'speed'];
 
 function ExerciseSearch({ text = '', tags = [], onChange = () => {} }) {
-  const classes = useStyles();
   const [selectedTags, setSelectedTags] = React.useState(tags);
   const [searchText, setSearchText] = React.useState(text);
 
@@ -49,7 +31,10 @@ function ExerciseSearch({ text = '', tags = [], onChange = () => {} }) {
   });
 
   return (
-    <Box className={classes.searchWrapper}>
+    <Box sx={{
+      display: 'flex',
+      flexDirection: 'column',
+    }}>
       <TextField
         autoFocus
         id="search"
@@ -58,8 +43,17 @@ function ExerciseSearch({ text = '', tags = [], onChange = () => {} }) {
         // helperText="Use hashtag to search for tags"
         onChange={onTextChange}
         defaultValue={text}
+        variant="standard"
       />
-      <Box className={classes.tagsWrapper}>
+      <Box sx={{
+        display: 'flex',
+        justifyContent: 'left',
+        flexWrap: 'wrap',
+        m: 1,
+        '& > *': {
+          m: 0.2,
+        },
+      }}>
         {availableTags.map(tag =>
           <Chip color="primary" size="small" onClick={toggleTag(tag)} label={tag}
                 variant={selectedTags.includes(tag) ? 'default' : 'outlined'} />

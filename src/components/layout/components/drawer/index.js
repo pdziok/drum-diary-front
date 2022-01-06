@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import clsx from 'clsx';
 import { Link, useLocation } from "react-router-dom";
-import { makeStyles, useTheme } from '@material-ui/core/styles';
-import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, } from '@material-ui/core';
+import { useTheme } from '@mui/styles';
+import { styled } from '@mui/material/styles';
+import { Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, } from '@mui/material';
 import {
   Assignment as AssignmentIcon,
   Book as BookIcon,
@@ -11,11 +12,11 @@ import {
   ChevronRight as ChevronRightIcon,
   // FiberSmartRecord as FiberSmartRecordIcon,
   Settings as SettingsIcon
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 
 export const drawerWidth = 240; //todo extract
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
   drawer: {
     width: drawerWidth,
     flexShrink: 0,

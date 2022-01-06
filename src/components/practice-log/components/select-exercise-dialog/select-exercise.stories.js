@@ -1,5 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
+import LocalizationProvider from "@mui/lab/LocalizationProvider";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
 
 import loadScriptDecorator from '../../../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../../../contexts';
@@ -10,6 +12,12 @@ const withGrooveUtilsProvider = story => (
   <GrooveUtilsContext.Provider value={true}>
     {story()}
   </GrooveUtilsContext.Provider>
+);
+
+const withLocalizationProvider = story => (
+  <LocalizationProvider dateAdapter={AdapterDateFns}>
+    {story()}
+  </LocalizationProvider>
 );
 
 const noop = () => {
@@ -52,6 +60,7 @@ storiesOf('PracticeLog.SelectExerciseDialog.Create new exercise', module)
   .add('Simple Dialog', () => <Dialog open={true} onClose={noop} initialStep={2} />)
 ;
 storiesOf('PracticeLog.SelectExerciseDialog.Fill entry details', module)
+  .addDecorator(withLocalizationProvider)
   .addDecorator(loadScriptDecorator('abc2svg-1.js'))
   .addDecorator(loadScriptDecorator('groove_utils.js'))
   .addDecorator(withGrooveUtilsProvider)

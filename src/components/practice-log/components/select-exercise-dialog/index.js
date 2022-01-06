@@ -1,19 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
+import { withStyles } from '@mui/styles';
 import {
   TextField, InputAdornment, Typography, Link, Button, LinearProgress, Box as MuiBox, Grid,
   List, ListItem, ListItemText,
   Dialog, DialogTitle, DialogContent, DialogContentText, DialogActions,
-} from '@material-ui/core';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import { blue } from '@material-ui/core/colors';
-import LaunchIcon from '@material-ui/icons/Launch';
+} from '@mui/material';
+import {   TimePicker } from '@mui/lab';
+import LaunchIcon from '@mui/icons-material/Launch';
 import { addMinutes } from 'date-fns'
 
 import { YoutubeVideo } from '../../../exercise';
@@ -23,40 +17,10 @@ import ExerciseSearch from '../../../exercise-search';
 import Exercise from '../../../exercise';
 import { minutesBetween } from '../../../../utils/datetime';
 
-const useStyles = makeStyles(theme => ({
-  avatar: {
-    backgroundColor: blue[100],
-    color: blue[600],
-  },
-  existingPanelDetails: {
-    padding: 0,
-    flexDirection: 'column',
-  },
-  newExercisePanelDetails: {
-    flexDirection: 'column',
-  },
-  dialogContent: {},
-  step1: {
-    padding: 0
-  },
-  timeField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 140,
-    '&:first-child': {
-      marginLeft: 0
-    },
-  },
-  durationField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1),
-    width: 120,
-  }
-}));
-
-const Container = withStyles(theme => ({
+const Container = withStyles(() => ({
   root: {
-    padding: theme.spacing(1, 2)
+    px: 1,
+    py: 2
   }
 }))(MuiBox);
 
@@ -180,8 +144,6 @@ function ExerciseCreation() {
 }
 
 function EntryCompletion({ entry, onChange }) {
-  const classes = useStyles();
-
   const handleTimeChange = (field) => (event) => {
     onChange({
       ...entry,
@@ -203,44 +165,65 @@ function EntryCompletion({ entry, onChange }) {
     })
   };
 
-  return <MuiPickersUtilsProvider utils={DateFnsUtils}>
+  return <div>
     <DialogContentText>
       Fill in details of the practice time
     </DialogContentText>
     <Grid container wrap="nowrap" justify="space-between">
-      <KeyboardTimePicker
+      <TimePicker
         margin="dense"
         id="started-at-picker"
         label="Started at"
         value={new Date(entry.startedAt)}
-        className={classes.timeField}
+        sx={{
+          mx: 1,
+          width: 140,
+          '&:first-child': {
+            ml: 0
+          },
+        }}
         onChange={handleTimeChange('startedAt')}
         KeyboardButtonProps={{
           'aria-label': 'change time',
         }}
+        renderInput={
+          props => <TextField {...props} />
+        }
       />
       <TextField
         type="number"
         margin="dense"
         id="duration-picker"
         label="Duration"
-        className={classes.durationField}
+        sx={{
+          mx: 1,
+          width: 120,
+        }}
         value={minutesBetween(entry.startedAt, entry.finishedAt)}
         onChange={handleDurationChange}
         InputProps={{
           endAdornment: <InputAdornment position="end">minutes</InputAdornment>
         }}
       />
-      <KeyboardTimePicker
+      <TimePicker
         margin="dense"
         id="finished-at-picker"
         label="Finished at"
         value={new Date(entry.finishedAt)}
         onChange={handleTimeChange('finishedAt')}
-        className={classes.timeField}
+        sx={{
+          mx: 1,
+          width: 140,
+          '&:first-child': {
+            ml: 0
+          },
+        }}
         KeyboardButtonProps={{
           'aria-label': 'change time',
         }}
+        renderInput={
+          props => <TextField {...props} />
+        }
       />
     </Grid>
     <Grid direction="column">
@@ -266,11 +249,10 @@ function EntryCompletion({ entry, onChange }) {
         onChange={handleFieldChange('notes')}
       />
     </Grid>
-  </MuiPickersUtilsProvider>
+  </div>
 }
 
 function SelectExerciseDialog({ exercises, onClose, open, initialStep = 1, search = defaultSearchParams }) {
-  const classes = useStyles();
   const [step, setStep] = React.useState(initialStep);
   const [previousStep, setPreviousStep] = React.useState(1);
   const [exerciseId, selectExercise] = React.useState();
@@ -299,7 +281,7 @@ function SelectExerciseDialog({ exercises, onClose, open, initialStep = 1, searc
   return (
     <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={open} scroll='paper'>
       <DialogTitle id="simple-dialog-title">{getDialogTitle(step)}</DialogTitle>
-      <DialogContent dividers={true} className={clsx(classes.dialogContent, classes[`step${step}`])}>
+      <DialogContent dividers={true}>
         {step === 1 &&
         <ExerciseSelection search={search} onSelect={handleExerciseSelection} onNewExerciseClick={goToStep(2)} />}
         {step === 2 && <ExerciseCreation onChange={setExerciseDetails} />}

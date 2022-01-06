@@ -1,19 +1,11 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline, Box } from '@mui/material';
 
 import Drawer from './components/drawer'
 import Content from "./components/content";
 import AppHeader from "./components/app-header";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    display: 'flex',
-  }
-}));
-
 export default function Layout() {
-  const classes = useStyles();
   const [drawerOpen, setOpen] = React.useState(false);
 
   const handleDrawerOpen = () => {
@@ -25,11 +17,13 @@ export default function Layout() {
   };
 
   return (
-    <div className={classes.root}>
+    <Box sx={{
+      display: 'flex',
+    }}>
       <CssBaseline />
       <AppHeader drawerOpen={drawerOpen} handleOpen={handleDrawerOpen} />
       <Drawer open={drawerOpen} handleClose={handleDrawerClose} />
       <Content />
-    </div>
+    </Box>
   );
 }

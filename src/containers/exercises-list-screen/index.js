@@ -2,22 +2,14 @@ import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { Container, Grid, LinearProgress, Paper } from '@material-ui/core';
+import { Container, Grid, LinearProgress, Paper } from '@mui/material';
 
 import Exercise from '../../components/exercise';
 import { fetchExercises } from '../../actions/exercises';
-import { makeStyles } from '@material-ui/core/styles/index';
 import { smartTruncate } from '../../utils/string';
-
-const useStyles = makeStyles(theme => ({
-  singleExercise: {
-    padding: theme.spacing(2),
-  },
-}));
 
 export function ExercisesListScreen({ pending, list, fetchExercises }) {
   const { page = 1 } = useParams();
-  const classes = useStyles();
 
   useEffect(() => {
     fetchExercises(page);
@@ -39,7 +31,7 @@ export function ExercisesListScreen({ pending, list, fetchExercises }) {
     <Container>
       <Grid container spacing={1}>
         {list.map(exercise => <Grid item xs={12}>
-          <Paper className={classes.singleExercise}>
+          <Paper sx={{padding: 2}}>
             <Exercise {...exercise} description={smartTruncate(exercise.description, 100)} />
           </Paper>
         </Grid>)}

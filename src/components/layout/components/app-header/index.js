@@ -1,13 +1,13 @@
 import React from 'react';
 import clsx from 'clsx';
-import {makeStyles} from '@material-ui/core/styles';
-import {AppBar, IconButton, Toolbar, Typography,} from '@material-ui/core';
-import {Menu as MenuIcon} from '@material-ui/icons';
+import { styled } from '@mui/material/styles';
+import {AppBar, IconButton, Toolbar, Typography,} from '@mui/material';
+import {Menu as MenuIcon} from '@mui/icons-material';
 
 import {drawerWidth} from '../drawer'
 import PropTypes from "prop-types";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = styled(theme => ({
     root: {
         display: 'flex',
     },

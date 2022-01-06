@@ -1,7 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { ThemeProvider } from '@material-ui/core/styles';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme } from '@mui/material//styles';
 
 import loadScriptDecorator from '../../utils/load-script-decorator'
 import { GrooveUtilsContext } from '../../contexts';
@@ -16,7 +15,7 @@ const withGrooveUtilsProvider = story => (
 );
 
 const withThemeProvider = story => (
-  <ThemeProvider theme={createMuiTheme()}>
+  <ThemeProvider theme={createTheme()}>
     {story()}
   </ThemeProvider>
 );

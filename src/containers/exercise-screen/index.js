@@ -12,7 +12,7 @@ import {
   TableHead,
   TableRow,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 
 import Exercise from '../../components/exercise';
 import { fetchExercise, fetchExerciseExecutions } from '../../actions/exercise';

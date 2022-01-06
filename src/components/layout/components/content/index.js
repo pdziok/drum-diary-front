@@ -1,24 +1,10 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { Box } from '@mui/material';
 
 import {Route, Switch} from "react-router-dom";
 import ExerciseScreen from "../../../../containers/exercise-screen";
 import ExercisesListScreen from "../../../../containers/exercises-list-screen";
 import PracticeLog from "../../../practice-log";
-
-const useStyles = makeStyles(theme => ({
-    toolbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'flex-end',
-        padding: theme.spacing(0, 1),
-        ...theme.mixins.toolbar,
-    },
-    content: {
-        flexGrow: 1,
-        padding: theme.spacing(3),
-    },
-}));
 
 //todo move to screen practice log screen
 const gScribeUrl = 'https://www.mikeslessons.com/groove/?Debug=1&TimeSig=4/4&Div=16&Tempo=80&Measures=2&H=|----------' +
@@ -68,11 +54,18 @@ const logEntries = [
 ];
 
 export default function Content() {
-    const classes = useStyles();
-
     return (
-        <main className={classes.content}>
-            <div className={classes.toolbar} />
+        <Box sx={{
+            flexGrow: 1,
+            padding: 3,
+        }}>
+            <Box sx={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'flex-end',
+                px: 0,
+                py: 1,
+            }} />
             <Switch>
                 <Route path="/exercise/:id">
                     <ExerciseScreen />
@@ -84,6 +77,6 @@ export default function Content() {
                     <PracticeLog entries={logEntries} />
                 </Route>
             </Switch>
-        </main>
+        </Box>
     )
 }

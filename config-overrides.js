@@ -1,6 +1,6 @@
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-module.exports = function override(config, env) {
+module.exports = function override(config) {
   if (!config.plugins) {
     config.plugins = [];
   }
@@ -16,14 +16,14 @@ module.exports = function override(config, env) {
       new CopyWebpackPlugin([{from: 'src/vendor/groove_utils.js', to: 'dist'}])
   );
 
-  config.module.rules[2].oneOf.map(rule => {
+  config.module.rules[1].oneOf.map(rule => {
     if (String(rule.test) === String(/\.(scss|sass)$/)) {
       rule.use.map(usage => {
         if (typeof usage === 'object' && usage.loader.match(/\bsass-loader\b/)) {
           if (!usage.options) {
             usage.options = {}
           }
-          usage.options.includePaths = ['./node_modules']
+          usage.options.sassOptions = { includePaths: ['./node_modules'] }
         }
         return usage;
       })

@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import InlineSVG from 'svg-inline-react';
 import MaterialIcon from '@material/react-material-icon';
-import { withStyles } from '@material-ui/core/styles';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@mui/styles';
+import LinearProgress from '@mui/material/LinearProgress';
+import Typography from '@mui/material/Typography';
 
 import './index.scss'
 import { generateSvgFromGScribe } from '../../utils/gscribe';
